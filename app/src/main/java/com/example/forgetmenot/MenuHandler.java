@@ -1,12 +1,18 @@
 package com.example.forgetmenot;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.content.Intent;
+
+import androidx.annotation.NonNull;
+
+import com.example.forgetmenot.habits.HabitTrackerActivity;
+import com.example.forgetmenot.todo.ToDoActivity;
 
 public final class MenuHandler {
 
     public enum MenuItem {
         TODO,
+        HABIT_TRACKER,
         WORKFLOW,
         OVERTIME,
         PRINT_DATA,
@@ -14,33 +20,54 @@ public final class MenuHandler {
         ABOUT
     }
 
-    private final Context context;
-
-    public MenuHandler(Context context) {
-        this.context = context;
+    private MenuHandler() {
+        // Utility class
     }
 
-    public MenuItem menuTodoClicked() {
-        return MenuItem.TODO;
-    }
+    /**
+     * One menu enum -> one explicit Intent -> one Activity.
+     */
+    public static boolean handleMenuClick(
+            @NonNull final Context context,
+            @NonNull final MenuItem menuItem
+    ) {
+        final Intent intent;
 
-    public MenuItem menuWorkflowClicked() {
-        return MenuItem.WORKFLOW;
-    }
+        switch (menuItem) {
+            case TODO:
+                intent = new Intent(context, ToDoActivity.class);
+                break;
 
-    public MenuItem menuOverTimeViewClicked() {
-        return MenuItem.OVERTIME;
-    }
+            case HABIT_TRACKER:
+                intent = new Intent(context, HabitTrackerActivity.class);
+                break;
+            /*
+            case WORKFLOW:
+                intent = new Intent(context, WorkFlowActivity.class);
+                break;
 
-    public MenuItem menuPrintDataClicked() {
-        return MenuItem.PRINT_DATA;
-    }
+            case OVERTIME:
+                intent = new Intent(context, OverTimeActivity.class);
+                break;
 
-    public MenuItem menuSettingsClicked() {
-        return MenuItem.SETTINGS;
-    }
+            case PRINT_DATA:
+                intent = new Intent(context, PrintDataActivity.class);
+                break;
 
-    public MenuItem menuAboutClicked() {
-        return MenuItem.ABOUT;
+            case SETTINGS:
+                intent = new Intent(context, SettingsActivity.class);
+                break;
+
+            case ABOUT:
+                intent = new Intent(context, AboutActivity.class);
+                break;
+            */
+
+            default:
+                return false;
+        }
+
+        context.startActivity(intent);
+        return true;
     }
 }

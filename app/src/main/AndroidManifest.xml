@@ -21,9 +21,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.expandable.ExpandableSectionActivity" />
+        <!-- Menu Destinations -->
+        <activity
+            android:name=".todo.ToDoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".habits.HabitTrackerActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".work_flow.WorkEndReceiver"
             android:exported="false" />
+
     </application>
 
 </manifest>

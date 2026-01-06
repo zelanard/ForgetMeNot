@@ -6,6 +6,10 @@
         android:title="To do list" />
 
     <item
+        android:id="@+id/menu_habit_tracker"
+        android:title="Habit Tracker" />
+
+    <item
         android:id="@+id/menu_workFlow"
         android:title="Work flow manager" />
 
