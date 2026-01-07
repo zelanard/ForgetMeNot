@@ -5,8 +5,10 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
+import com.example.forgetmenot.About.AboutActivity;
 import com.example.forgetmenot.habits.HabitTrackerActivity;
 import com.example.forgetmenot.todo.ToDoActivity;
+import com.example.forgetmenot.workflow.WorkFlowActivity;
 
 public final class MenuHandler {
 
@@ -41,6 +43,11 @@ public final class MenuHandler {
             case HABIT_TRACKER:
                 intent = new Intent(context, HabitTrackerActivity.class);
                 break;
+
+            case WORKFLOW:
+                intent = new Intent(context, WorkFlowActivity.class);
+                break;
+
             /*
             case WORKFLOW:
                 intent = new Intent(context, WorkFlowActivity.class);
@@ -58,10 +65,10 @@ public final class MenuHandler {
                 intent = new Intent(context, SettingsActivity.class);
                 break;
 
+            */
             case ABOUT:
                 intent = new Intent(context, AboutActivity.class);
                 break;
-            */
 
             default:
                 return false;

@@ -24,6 +24,7 @@
     <!-- Actions -->
     <string name="action_save">Save</string>
 
+    <string name="not_implemented_yet">Not implemented yet.</string>
 
     <string name="about_user_guide_title">User Guide</string>
     <string name="about_user_guide_body">User Guide</string>
@@ -63,6 +64,7 @@ This Privacy Policy may be updated in the future. Any changes will be reflected 
 \n
 If you have questions or concerns about privacy, please contact the developer.
     </string>
+
     <string name="about_eula_title">End User Licence Agreement</string>
     <string name="about_eula_body" formatted="false">
 This End User Licence Agreement ("Agreement") governs your use of the ForgetMeNot mobile application ("the App").\n
@@ -100,6 +102,16 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="about_faq_title">Frequently Asked Questions</string>
     <string name="about_faq_body">These are my frequently asked questions</string>
 
+    <!-- workflow -->
+    <string name="workflow_status_checked_in">Status: Checked in</string>
+    <string name="workflow_status_checked_out">Status: Checked out</string>
+
+    <string name="workflow_action_check_in">Check in</string>
+    <string name="workflow_action_check_out">Check out</string>
+
+    <string name="workflow_selected_preview">Selected: %1$s %2$s</string>
+
+
     <string name="header_todo">To Do List</string>
     <string name="header_workflow">Workflow</string>
     <string name="header_overtime_view">Over Time View</string>
@@ -112,4 +124,5 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="nOfm">0 / 1</string>
     <string name="expand">Expand</string>
     <string name="habit_days_title">Days</string>
+    <string name="workday_is_over">Work day is over</string>
 </resources>
