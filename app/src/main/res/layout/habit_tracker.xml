@@ -3,20 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Habit Tracker"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" />
 
-    <TextView
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Coming soon."
-        android:textSize="16sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
 </LinearLayout>
