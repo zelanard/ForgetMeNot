@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
     public interface Actions {
         void onDelete(int index);
         void onIncrementToday(@NonNull String habitId);
+        void onEdit(@NonNull Habit habit);
     }
 
     private final Actions actions;
@@ -70,6 +72,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
 
         private final TextView tvProgress;
         private final Button btnAddCompletion;
+        private final ImageButton btnEditHabit;
 
         VH(@NonNull final View itemView) {
             super(itemView);
@@ -79,6 +82,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
 
             tvProgress = itemView.findViewById(R.id.tvProgress);
             btnAddCompletion = itemView.findViewById(R.id.btnAddCompletion);
+            btnEditHabit = itemView.findViewById(R.id.btnEditHabit);
         }
 
         void bind(
@@ -103,6 +107,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
             tvProgress.setText(completedToday ? (count + " / " + goal + " (Done)") : (count + " / " + goal));
 
             btnAddCompletion.setEnabled(!habitId.isEmpty());
+            btnEditHabit.setOnClickListener(v -> actions.onEdit(habit));
             btnAddCompletion.setOnClickListener(v -> {
                 if (!habitId.isEmpty()) {
                     actions.onIncrementToday(habitId);

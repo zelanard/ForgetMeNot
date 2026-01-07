@@ -160,4 +160,20 @@ public final class HabitRepository {
             return null;
         }
     }
+
+    public void updateHabit(@NonNull final Habit updated) {
+        if (updated.Id == null || updated.Id.trim().isEmpty()) {
+            return;
+        }
+
+        final ArrayList<Habit> habits = loadHabits();
+        for (int i = 0; i < habits.size(); i++) {
+            final Habit h = habits.get(i);
+            if (h.Id != null && h.Id.equals(updated.Id)) {
+                habits.set(i, updated);
+                saveHabits(habits);
+                return;
+            }
+        }
+    }
 }

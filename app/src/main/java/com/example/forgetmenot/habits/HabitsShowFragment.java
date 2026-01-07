@@ -48,6 +48,12 @@ public final class HabitsShowFragment extends Fragment {
             public void onIncrementToday(@NonNull final String habitId) {
                 viewModel.incrementToday(habitId);
             }
+
+            @Override
+            public void onEdit(@NonNull final Habit habit) {
+                HabitEditDialogFragment.newInstance(habit)
+                        .show(getParentFragmentManager(), "edit_habit");
+            }
         });
 
         recycler.setAdapter(adapter);

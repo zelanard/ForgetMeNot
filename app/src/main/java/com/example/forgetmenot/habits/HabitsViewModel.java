@@ -44,12 +44,8 @@ public final class HabitsViewModel extends AndroidViewModel {
         return doneTodayLiveData;
     }
 
-    public void addHabit(
-            @NonNull final String name,
-            @NonNull final String description,
-            @NonNull final EnumSet<Habit.Day> days,
-            final int goal
-    ) {
+    public void addHabit(@NonNull final String name, @NonNull final String description,
+                         @NonNull final EnumSet<Habit.Day> days, final int goal) {
         final Habit habit = new Habit(name, description, Instant.now(), days, goal);
         repository.addHabit(habit);
         reload();
@@ -115,4 +111,32 @@ public final class HabitsViewModel extends AndroidViewModel {
         doneTodayLiveData.setValue(Collections.unmodifiableMap(done));
     }
 
+    public void updateHabit(@NonNull final String habitId, @NonNull final String name,
+                            @NonNull final String description, @NonNull final EnumSet<Habit.Day> days) {
+        final ArrayList<Habit> habits = repository.loadHabits();
+        Habit existing = null;
+
+        for (int i = 0; i < habits.size(); i++) {
+            final Habit h = habits.get(i);
+            if (h.Id != null && h.Id.equals(habitId)) {
+                existing = h;
+                break;
+            }
+        }
+
+        if (existing == null) {
+            return;
+        }
+
+        // Preserve immutable fields / identity / goal / start date
+        final Habit updated = new Habit(name, description,
+                existing.StartDate != null ? existing.StartDate : Instant.now(),
+                days,
+                Math.max(1, existing.Goal));
+
+        updated.Id = existing.Id;
+
+        repository.updateHabit(updated);
+        reload();
+    }
 }
