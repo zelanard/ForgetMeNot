@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.forgetmenot.R;
+import androidx.appcompat.app.AlertDialog;
 
 public final class HabitsShowFragment extends Fragment {
 
@@ -41,7 +42,15 @@ public final class HabitsShowFragment extends Fragment {
         adapter = new HabitsAdapter(new HabitsAdapter.Actions() {
             @Override
             public void onDelete(final int index) {
-                viewModel.removeHabitAt(index);
+
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.habit_delete_title)
+                        .setMessage(R.string.habit_delete_message)
+                        .setNegativeButton(R.string.action_cancel, null)
+                        .setPositiveButton(R.string.action_delete, (dialog, which) -> {
+                            viewModel.removeHabitAt(index);
+                        })
+                        .show();
             }
 
             @Override

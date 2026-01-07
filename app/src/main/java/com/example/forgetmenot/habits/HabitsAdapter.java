@@ -73,6 +73,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
         private final TextView tvProgress;
         private final Button btnAddCompletion;
         private final ImageButton btnEditHabit;
+        private final ImageButton btnDeleteHabit;
 
         VH(@NonNull final View itemView) {
             super(itemView);
@@ -83,6 +84,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
             tvProgress = itemView.findViewById(R.id.tvProgress);
             btnAddCompletion = itemView.findViewById(R.id.btnAddCompletion);
             btnEditHabit = itemView.findViewById(R.id.btnEditHabit);
+            btnDeleteHabit = itemView.findViewById(R.id.btnDeleteHabit);
         }
 
         void bind(
@@ -108,16 +110,11 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
 
             btnAddCompletion.setEnabled(!habitId.isEmpty());
             btnEditHabit.setOnClickListener(v -> actions.onEdit(habit));
+            btnDeleteHabit.setOnClickListener(v -> actions.onDelete(index));
             btnAddCompletion.setOnClickListener(v -> {
                 if (!habitId.isEmpty()) {
                     actions.onIncrementToday(habitId);
                 }
-            });
-
-            // Delete (long press)
-            itemView.setOnLongClickListener(v -> {
-                actions.onDelete(index);
-                return true;
             });
         }
 

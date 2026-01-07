@@ -43,13 +43,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:text="@string/nOfm" />
+            android:text="0 / 1" />
 
         <Button
             android:id="@+id/btnAddCompletion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/plusOne" />
+            android:text="+1" />
 
         <ImageButton
             android:id="@+id/btnEditHabit"
@@ -57,7 +57,17 @@
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/edit_habit"
+            android:contentDescription="Edit habit"
             android:src="@android:drawable/ic_menu_edit" />
+
+        <ImageButton
+            android:id="@+id/btnDeleteHabit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Delete habit"
+            android:src="@android:drawable/ic_menu_delete" />
     </LinearLayout>
+
 </LinearLayout>
