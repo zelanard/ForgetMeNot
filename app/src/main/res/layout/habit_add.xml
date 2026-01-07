@@ -31,27 +31,9 @@
             android:hint="Goal (times per day)"
             android:inputType="number" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Days"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp">
-
-            <CheckBox android:id="@+id/cbMon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Monday"/>
-            <CheckBox android:id="@+id/cbTue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tuesday"/>
-            <CheckBox android:id="@+id/cbWed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wednesday"/>
-            <CheckBox android:id="@+id/cbThu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thursday"/>
-            <CheckBox android:id="@+id/cbFri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Friday"/>
-            <CheckBox android:id="@+id/cbSat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Saturday"/>
-            <CheckBox android:id="@+id/cbSun" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sunday"/>
-        </LinearLayout>
+        <include
+            android:id="@+id/daysExpandable"
+            layout="@layout/expandable_container" />
 
         <Button
             android:id="@+id/btnAddHabit"

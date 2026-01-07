@@ -7,6 +7,24 @@
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
 
+    <!-- Days -->
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_sunday">Sunday</string>
+
+    <!-- Habit editing -->
+    <string name="habit_edit_title">Edit habit</string>
+    <string name="habit_error_name_required">Name is required.</string>
+    <string name="habit_error_days_required">Select at least one day.</string>
+
+    <!-- Actions -->
+    <string name="action_save">Save</string>
+
+
     <string name="about_user_guide_title">User Guide</string>
     <string name="about_user_guide_body">User Guide</string>
 
@@ -92,4 +110,6 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="edit_habit">Edit habit</string>
     <string name="plusOne">+1</string>
     <string name="nOfm">0 / 1</string>
+    <string name="expand">Expand</string>
+    <string name="habit_days_title">Days</string>
 </resources>

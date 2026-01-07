@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,28 @@ public final class HabitsAddFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        final View daysExpandable = view.findViewById(R.id.daysExpandable);
+
+        final TextView title = daysExpandable.findViewById(R.id.section_title);
+        final View header = daysExpandable.findViewById(R.id.header);
+        final View content = daysExpandable.findViewById(R.id.section_content);
+        final android.widget.ImageView icon = daysExpandable.findViewById(R.id.expand_icon);
+
+        title.setText(R.string.habit_days_title);
+
+// Inflate checkboxes into section_content
+        final android.widget.LinearLayout container = daysExpandable.findViewById(R.id.section_content);
+        final View daysView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.habit_days_checkboxes, container, false);
+        container.addView(daysView);
+
+// Toggle
+        header.setOnClickListener(v -> {
+            final boolean willExpand = content.getVisibility() != View.VISIBLE;
+            content.setVisibility(willExpand ? View.VISIBLE : View.GONE);
+            icon.setRotation(willExpand ? 180f : 0f);
+        });
+
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(requireActivity()).get(HabitsViewModel.class);
@@ -43,13 +66,13 @@ public final class HabitsAddFragment extends Fragment {
         final EditText etDescription = view.findViewById(R.id.etDescription);
         final EditText etGoal = view.findViewById(R.id.etGoal);
 
-        final CheckBox cbMon = view.findViewById(R.id.cbMon);
-        final CheckBox cbTue = view.findViewById(R.id.cbTue);
-        final CheckBox cbWed = view.findViewById(R.id.cbWed);
-        final CheckBox cbThu = view.findViewById(R.id.cbThu);
-        final CheckBox cbFri = view.findViewById(R.id.cbFri);
-        final CheckBox cbSat = view.findViewById(R.id.cbSat);
-        final CheckBox cbSun = view.findViewById(R.id.cbSun);
+        final CheckBox cbMon = daysExpandable.findViewById(R.id.cbMon);
+        final CheckBox cbTue = daysExpandable.findViewById(R.id.cbTue);
+        final CheckBox cbWed = daysExpandable.findViewById(R.id.cbWed);
+        final CheckBox cbThu = daysExpandable.findViewById(R.id.cbThu);
+        final CheckBox cbFri = daysExpandable.findViewById(R.id.cbFri);
+        final CheckBox cbSat = daysExpandable.findViewById(R.id.cbSat);
+        final CheckBox cbSun = daysExpandable.findViewById(R.id.cbSun);
 
         final Button btnAdd = view.findViewById(R.id.btnAddHabit);
 

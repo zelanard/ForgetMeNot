@@ -3,9 +3,13 @@ package com.example.forgetmenot.habits;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,14 +50,6 @@ public final class HabitEditDialogFragment extends DialogFragment {
         final EditText etName = v.findViewById(R.id.etEditName);
         final EditText etDesc = v.findViewById(R.id.etEditDescription);
 
-        final CheckBox cbMon = v.findViewById(R.id.cbEditMon);
-        final CheckBox cbTue = v.findViewById(R.id.cbEditTue);
-        final CheckBox cbWed = v.findViewById(R.id.cbEditWed);
-        final CheckBox cbThu = v.findViewById(R.id.cbEditThu);
-        final CheckBox cbFri = v.findViewById(R.id.cbEditFri);
-        final CheckBox cbSat = v.findViewById(R.id.cbEditSat);
-        final CheckBox cbSun = v.findViewById(R.id.cbEditSun);
-
         final Bundle args = getArguments() != null ? getArguments() : new Bundle();
         final String habitId = args.getString(ARG_ID, "");
         final String name = args.getString(ARG_NAME, "");
@@ -63,6 +59,31 @@ public final class HabitEditDialogFragment extends DialogFragment {
         etName.setText(name);
         etDesc.setText(desc);
 
+        // Expandable "Days" section container (expandable_container.xml included in habit_edit_dialog.xml)
+        final View daysExpandable = v.findViewById(R.id.daysExpandable);
+
+        final TextView sectionTitle = daysExpandable.findViewById(R.id.section_title);
+        final View header = daysExpandable.findViewById(R.id.header);
+        final View content = daysExpandable.findViewById(R.id.section_content);
+        final ImageView icon = daysExpandable.findViewById(R.id.expand_icon);
+
+        sectionTitle.setText(R.string.habit_days_title);
+
+        // Inflate shared checkbox group into the expandable container
+        final LinearLayout container = daysExpandable.findViewById(R.id.section_content);
+        final View daysView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.habit_days_checkboxes, container, false);
+        container.addView(daysView);
+
+        // Find checkboxes from the inflated content (ids: cbMon..cbSun)
+        final CheckBox cbMon = daysExpandable.findViewById(R.id.cbMon);
+        final CheckBox cbTue = daysExpandable.findViewById(R.id.cbTue);
+        final CheckBox cbWed = daysExpandable.findViewById(R.id.cbWed);
+        final CheckBox cbThu = daysExpandable.findViewById(R.id.cbThu);
+        final CheckBox cbFri = daysExpandable.findViewById(R.id.cbFri);
+        final CheckBox cbSat = daysExpandable.findViewById(R.id.cbSat);
+        final CheckBox cbSun = daysExpandable.findViewById(R.id.cbSun);
+
         cbMon.setChecked(days.contains(Habit.Day.Monday));
         cbTue.setChecked(days.contains(Habit.Day.Tuesday));
         cbWed.setChecked(days.contains(Habit.Day.Wednesday));
@@ -71,13 +92,21 @@ public final class HabitEditDialogFragment extends DialogFragment {
         cbSat.setChecked(days.contains(Habit.Day.Saturday));
         cbSun.setChecked(days.contains(Habit.Day.Sunday));
 
+        // Optional: start expanded in edit mode (comment out if you prefer collapsed)
+        content.setVisibility(View.VISIBLE);
+        icon.setRotation(180f);
+
+        header.setOnClickListener(x -> {
+            final boolean willExpand = content.getVisibility() != View.VISIBLE;
+            content.setVisibility(willExpand ? View.VISIBLE : View.GONE);
+            icon.setRotation(willExpand ? 180f : 0f);
+        });
+
         return new AlertDialog.Builder(requireContext())
-                .setTitle("Edit Habit")
+                .setTitle(R.string.habit_edit_title)
                 .setView(v)
-                .setNegativeButton("Cancel", (d, which) -> {
-                    // no-op
-                })
-                .setPositiveButton("Save", null) // override after show to validate
+                .setNegativeButton(R.string.action_cancel, null)
+                .setPositiveButton(R.string.action_save, null) // override after show to validate
                 .create();
     }
 
@@ -91,32 +120,27 @@ public final class HabitEditDialogFragment extends DialogFragment {
         }
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(btn -> {
-            final View v = dialog.findViewById(android.R.id.content);
-            if (v == null) {
-                dismiss();
-                return;
-            }
-
-            final View root = dialog.findViewById(R.id.etEditName).getRootView();
 
             final EditText etName = dialog.findViewById(R.id.etEditName);
             final EditText etDesc = dialog.findViewById(R.id.etEditDescription);
-
-            final CheckBox cbMon = dialog.findViewById(R.id.cbEditMon);
-            final CheckBox cbTue = dialog.findViewById(R.id.cbEditTue);
-            final CheckBox cbWed = dialog.findViewById(R.id.cbEditWed);
-            final CheckBox cbThu = dialog.findViewById(R.id.cbEditThu);
-            final CheckBox cbFri = dialog.findViewById(R.id.cbEditFri);
-            final CheckBox cbSat = dialog.findViewById(R.id.cbEditSat);
-            final CheckBox cbSun = dialog.findViewById(R.id.cbEditSun);
 
             final String newName = etName != null && etName.getText() != null ? etName.getText().toString().trim() : "";
             final String newDesc = etDesc != null && etDesc.getText() != null ? etDesc.getText().toString().trim() : "";
 
             if (TextUtils.isEmpty(newName)) {
-                Toast.makeText(requireContext(), "Name is required.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.habit_error_name_required, Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            final View daysExpandable = dialog.findViewById(R.id.daysExpandable);
+
+            final CheckBox cbMon = daysExpandable != null ? daysExpandable.findViewById(R.id.cbMon) : null;
+            final CheckBox cbTue = daysExpandable != null ? daysExpandable.findViewById(R.id.cbTue) : null;
+            final CheckBox cbWed = daysExpandable != null ? daysExpandable.findViewById(R.id.cbWed) : null;
+            final CheckBox cbThu = daysExpandable != null ? daysExpandable.findViewById(R.id.cbThu) : null;
+            final CheckBox cbFri = daysExpandable != null ? daysExpandable.findViewById(R.id.cbFri) : null;
+            final CheckBox cbSat = daysExpandable != null ? daysExpandable.findViewById(R.id.cbSat) : null;
+            final CheckBox cbSun = daysExpandable != null ? daysExpandable.findViewById(R.id.cbSun) : null;
 
             final EnumSet<Habit.Day> newDays = EnumSet.noneOf(Habit.Day.class);
             if (cbMon != null && cbMon.isChecked()) newDays.add(Habit.Day.Monday);
@@ -128,7 +152,7 @@ public final class HabitEditDialogFragment extends DialogFragment {
             if (cbSun != null && cbSun.isChecked()) newDays.add(Habit.Day.Sunday);
 
             if (newDays.isEmpty()) {
-                Toast.makeText(requireContext(), "Select at least one day.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.habit_error_days_required, Toast.LENGTH_SHORT).show();
                 return;
             }
 

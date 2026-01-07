@@ -27,7 +27,7 @@
             android:id="@+id/expand_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="Expand"
+            android:contentDescription="@string/expand"
             android:src="@android:drawable/arrow_down_float" />
     </LinearLayout>
 

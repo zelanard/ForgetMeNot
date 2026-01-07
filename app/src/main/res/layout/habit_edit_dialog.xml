@@ -22,20 +22,9 @@
             android:layout_marginTop="12dp"
             android:hint="Description" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Days"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
-        <CheckBox android:id="@+id/cbEditMon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Monday"/>
-        <CheckBox android:id="@+id/cbEditTue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tuesday"/>
-        <CheckBox android:id="@+id/cbEditWed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wednesday"/>
-        <CheckBox android:id="@+id/cbEditThu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thursday"/>
-        <CheckBox android:id="@+id/cbEditFri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Friday"/>
-        <CheckBox android:id="@+id/cbEditSat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Saturday"/>
-        <CheckBox android:id="@+id/cbEditSun" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sunday"/>
+        <include
+            android:id="@+id/daysExpandable"
+            layout="@layout/expandable_container" />
 
     </LinearLayout>
 </ScrollView>

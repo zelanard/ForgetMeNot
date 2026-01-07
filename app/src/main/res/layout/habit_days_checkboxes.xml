@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <CheckBox android:id="@+id/cbMon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_monday"/>
+    <CheckBox android:id="@+id/cbTue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_tuesday"/>
+    <CheckBox android:id="@+id/cbWed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_wednesday"/>
+    <CheckBox android:id="@+id/cbThu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_thursday"/>
+    <CheckBox android:id="@+id/cbFri" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_friday"/>
+    <CheckBox android:id="@+id/cbSat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_saturday"/>
+    <CheckBox android:id="@+id/cbSun" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/day_sunday"/>
+</LinearLayout>
