@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.forgetmenot.R;
-import androidx.appcompat.app.AlertDialog;
 
 public final class HabitsShowFragment extends Fragment {
 
