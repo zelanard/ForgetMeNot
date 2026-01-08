@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.forgetmenot.R;
-
 import java.security.InvalidParameterException;
 
 public final class HabitsPagerAdapter extends FragmentStateAdapter {
@@ -23,13 +21,15 @@ public final class HabitsPagerAdapter extends FragmentStateAdapter {
                 return new HabitsShowFragment();
             case 1:
                 return new HabitsAddFragment();
+            case 2:
+                return new HabitsStatisticsFragment();
             default:
-                throw new InvalidParameterException("Tab not recofnized");
+                throw new IllegalArgumentException("Tab not recognized");
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

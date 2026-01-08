@@ -137,4 +137,5 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="Tasks_Tab_Header">Tasks</string>
     <string name="Add_Tab_Header">Add</string>
     <string name="Habits_Tab_Header">My Habits</string>
+    <string name="Stats_Tab_Header">Stats</string>
 </resources>

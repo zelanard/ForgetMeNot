@@ -36,8 +36,11 @@ public final class HabitTrackerActivity extends BaseActivity {
                     case 1:
                         tab.setText(R.string.Add_Tab_Header);
                         break;
+                    case 2:
+                        tab.setText(R.string.Stats_Tab_Header);
+                        break;
                     default:
-                        throw new InvalidParameterException("Tab not recofnized");
+                        throw new IllegalArgumentException("Tab not recofnized");
                 }
             }
         }).attach();

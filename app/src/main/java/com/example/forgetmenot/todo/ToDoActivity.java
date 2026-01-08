@@ -40,7 +40,7 @@ public final class ToDoActivity extends BaseActivity {
                         tab.setText(R.string.Add_Tab_Header);
                         break;
                     default:
-                        throw new InvalidParameterException("Tab not recofnized");
+                        throw new IllegalArgumentException("Tab not recofnized");
                 }
             }
         }).attach();

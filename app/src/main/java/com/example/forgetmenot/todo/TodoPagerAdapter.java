@@ -22,7 +22,7 @@ public final class TodoPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new TodoAddFragment();
             default:
-                throw new InvalidParameterException("ToDo tab is not recognized");
+                throw new IllegalArgumentException("ToDo tab is not recognized");
         }
     }
 
