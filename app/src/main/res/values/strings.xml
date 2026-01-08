@@ -141,4 +141,6 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="workflow_tab_check">Check</string>
     <string name="workflow_tab_overtime">Overtime</string>
     <string name="workflow_tab_print">Print</string>
+    <string name="workflow_overtime_week_range">Week: %1$s to %2$s</string>
+    <string name="workflow_overtime_projection">Projected total overtime (full hours remaining): %1$s</string>
 </resources>
