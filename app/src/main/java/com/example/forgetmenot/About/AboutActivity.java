@@ -18,29 +18,29 @@ public final class AboutActivity extends BaseActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setBaseContentView(R.layout.activity_expandable_section);
-
-        setTitle(R.string.header_about);
+        setBaseContentView(R.layout.about);
+        setTitle(R.string.header_info);
 
         final RecyclerView recycler = findViewById(R.id.recycler_sections);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
         final ArrayList<ExpandableSection> sections = new ArrayList<>();
+
         sections.add(new ExpandableSection(
-                getString(R.string.about_user_guide_title),
-                getString(R.string.about_user_guide_body)
+                getString(R.string.info_user_guide_title),
+                getString(R.string.info_user_guide_body)
         ));
         sections.add(new ExpandableSection(
-                getString(R.string.about_gdpr_title),
-                getString(R.string.about_gdpr_body)
+                getString(R.string.info_gdpr_title),
+                getString(R.string.info_gdpr_body)
         ));
         sections.add(new ExpandableSection(
-                getString(R.string.about_eula_title),
-                getString(R.string.about_eula_body)
+                getString(R.string.info_eula_title),
+                getString(R.string.info_eula_body)
         ));
         sections.add(new ExpandableSection(
-                getString(R.string.about_faq_title),
-                getString(R.string.about_faq_body)
+                getString(R.string.info_faq_title),
+                getString(R.string.info_faq_body)
         ));
 
         recycler.setAdapter(new ExpandableSectionAdapter(sections));

@@ -68,14 +68,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             return MenuHandler.MenuItem.HABIT_TRACKER;
         } else if (menuId == R.id.menu_workFlow) {
             return MenuHandler.MenuItem.WORKFLOW;
-        } else if (menuId == R.id.menu_overTimeView) {
-            return MenuHandler.MenuItem.OVERTIME;
-        } else if (menuId == R.id.menu_printData) {
-            return MenuHandler.MenuItem.PRINT_DATA;
         } else if (menuId == R.id.menu_settings) {
             return MenuHandler.MenuItem.SETTINGS;
         } else if (menuId == R.id.menu_about) {
-            return MenuHandler.MenuItem.ABOUT;
+            return MenuHandler.MenuItem.INFO;
         }
         return null;
     }

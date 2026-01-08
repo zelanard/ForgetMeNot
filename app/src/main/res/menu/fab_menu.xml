@@ -3,29 +3,21 @@
 
     <item
         android:id="@+id/menu_todo"
-        android:title="To do list" />
+        android:title="@string/header_todo" />
 
     <item
         android:id="@+id/menu_habit_tracker"
-        android:title="Habit Tracker" />
+        android:title="@string/header_habit" />
 
     <item
         android:id="@+id/menu_workFlow"
-        android:title="Work flow manager" />
-
-    <item
-        android:id="@+id/menu_overTimeView"
-        android:title="Overtime view" />
-
-    <item
-        android:id="@+id/menu_printData"
-        android:title="Print data" />
+        android:title="@string/header_workflow" />
 
     <item
         android:id="@+id/menu_settings"
-        android:title="Settings" />
+        android:title="@string/header_settings" />
 
     <item
         android:id="@+id/menu_about"
-        android:title="About" />
+        android:title="@string/header_info" />
 </menu>

@@ -16,10 +16,8 @@ public final class MenuHandler {
         TODO,
         HABIT_TRACKER,
         WORKFLOW,
-        OVERTIME,
-        PRINT_DATA,
         SETTINGS,
-        ABOUT
+        INFO
     }
 
     private MenuHandler() {
@@ -49,24 +47,12 @@ public final class MenuHandler {
                 break;
 
             /*
-            case WORKFLOW:
-                intent = new Intent(context, WorkFlowActivity.class);
-                break;
-
-            case OVERTIME:
-                intent = new Intent(context, OverTimeActivity.class);
-                break;
-
-            case PRINT_DATA:
-                intent = new Intent(context, PrintDataActivity.class);
-                break;
-
             case SETTINGS:
                 intent = new Intent(context, SettingsActivity.class);
                 break;
 
             */
-            case ABOUT:
+            case INFO:
                 intent = new Intent(context, AboutActivity.class);
                 break;
 

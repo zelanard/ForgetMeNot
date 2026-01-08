@@ -10,6 +10,8 @@ import com.example.forgetmenot.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.security.InvalidParameterException;
+
 public final class ToDoActivity extends BaseActivity {
 
     private TabLayout tabLayout;
@@ -30,10 +32,15 @@ public final class ToDoActivity extends BaseActivity {
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull final TabLayout.Tab tab, final int position) {
-                if (position == 0) {
-                    tab.setText("Add");
-                } else {
-                    tab.setText("Tasks");
+                switch (position){
+                    case 0:
+                        tab.setText(R.string.Tasks_Tab_Header);
+                        break;
+                    case 1:
+                        tab.setText(R.string.Add_Tab_Header);
+                        break;
+                    default:
+                        throw new InvalidParameterException("Tab not recofnized");
                 }
             }
         }).attach();

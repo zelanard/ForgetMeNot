@@ -26,11 +26,11 @@
 
     <string name="not_implemented_yet">Not implemented yet.</string>
 
-    <string name="about_user_guide_title">User Guide</string>
-    <string name="about_user_guide_body">User Guide</string>
+    <string name="info_user_guide_title">User Guide</string>
+    <string name="info_user_guide_body">User Guide</string>
 
-    <string name="about_gdpr_title">Privacy Policy</string>
-    <string name="about_gdpr_body" formatted="false">
+    <string name="info_gdpr_title">Privacy Policy</string>
+    <string name="info_gdpr_body" formatted="false">
 Your privacy is important. This Privacy Policy explains how the ForgetMeNot app handles your data in accordance with the General Data Protection Regulation (GDPR).\n
 \n
 1. Data Collection\n
@@ -65,8 +65,8 @@ This Privacy Policy may be updated in the future. Any changes will be reflected 
 If you have questions or concerns about privacy, please contact the developer.
     </string>
 
-    <string name="about_eula_title">End User Licence Agreement</string>
-    <string name="about_eula_body" formatted="false">
+    <string name="info_eula_title">End User Licence Agreement</string>
+    <string name="info_eula_body" formatted="false">
 This End User Licence Agreement ("Agreement") governs your use of the ForgetMeNot mobile application ("the App").\n
 \n
 By installing or using the App, you agree to be bound by this Agreement. If you do not agree, do not use the App.\n
@@ -99,8 +99,15 @@ This Agreement shall be governed by and interpreted in accordance with applicabl
 If you have questions regarding this Agreement, please contact the developer.\n
 </string>
 
-    <string name="about_faq_title">Frequently Asked Questions</string>
-    <string name="about_faq_body">These are my frequently asked questions</string>
+    <string name="info_faq_title">Frequently Asked Questions</string>
+    <string name="info_faq_body">
+        Can i store my data online?\n
+        Not at this moment. But it is a feature we will be working on in the near future.\n
+        \n
+        Do you share my data?\n
+        No. At this moment no data is shared with anyone.\n
+        \n
+    </string>
 
     <!-- workflow -->
     <string name="workflow_status_checked_in">Status: Checked in</string>
@@ -117,7 +124,7 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="header_overtime_view">Over Time View</string>
     <string name="header_print_data">Print Data</string>
     <string name="header_settings">Settings</string>
-    <string name="header_about">About</string>
+    <string name="header_info">Info</string>
     <string name="Workflow">Workflow</string>
     <string name="edit_habit">Edit habit</string>
     <string name="plusOne">+1</string>
@@ -125,4 +132,8 @@ If you have questions regarding this Agreement, please contact the developer.\n
     <string name="expand">Expand</string>
     <string name="habit_days_title">Days</string>
     <string name="workday_is_over">Work day is over</string>
+    <string name="delete_task">Delete task</string>
+    <string name="header_habit">Habit Tracker</string>
+    <string name="Tasks_Tab_Header">Tasks</string>
+    <string name="Add_Tab_Header">Add</string>
 </resources>
