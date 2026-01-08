@@ -9,12 +9,14 @@ public final class WorkSession {
     public Instant CheckIn;
     public Instant CheckOut;       // null while active
     public int IntendedMinutes;    // >= 0
+    public int BreakMinutes;       // >= 0
 
     public WorkSession(final Instant checkIn, final int intendedMinutes) {
         Id = UUID.randomUUID().toString();
         CheckIn = checkIn;
         CheckOut = null;
         IntendedMinutes = Math.max(0, intendedMinutes);
+        BreakMinutes = 0;
     }
 
     public boolean isOpen() {

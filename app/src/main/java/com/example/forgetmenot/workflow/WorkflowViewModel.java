@@ -38,13 +38,13 @@ public final class WorkflowViewModel extends AndroidViewModel {
         reload();
     }
 
-    public void checkOut(@NonNull final Instant when) {
+    public void checkOut(@NonNull final Instant when, final int breakMinutes) {
         final WorkSession open = repository.getOpenSession();
         if (open == null || open.Id == null || open.Id.trim().isEmpty()) {
             reload();
             return;
         }
-        repository.endSession(open.Id, when);
+        repository.endSession(open.Id, when, breakMinutes);
         reload();
     }
 

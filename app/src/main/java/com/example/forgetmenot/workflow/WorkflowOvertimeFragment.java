@@ -95,8 +95,13 @@ public final class WorkflowOvertimeFragment extends Fragment {
                     continue;
                 }
 
-                // Split session into day buckets
+// Split this session into day buckets (temp), then apply break subtraction to checkout day
+                final LinkedHashMap<LocalDate, Integer> adds = new LinkedHashMap<>();
                 for (final Map.Entry<LocalDate, Integer> e : workedMinutesByDay.entrySet()) {
+                    adds.put(e.getKey(), 0);
+                }
+
+                for (final Map.Entry<LocalDate, Integer> e : adds.entrySet()) {
                     final LocalDate d = e.getKey();
 
                     final Instant dayStart = d.atStartOfDay(zone).toInstant();
@@ -106,7 +111,25 @@ public final class WorkflowOvertimeFragment extends Fragment {
                     if (overlapMillis <= 0) continue;
 
                     final int addMinutes = (int) (overlapMillis / 60000L);
-                    workedMinutesByDay.put(d, e.getValue() + addMinutes);
+                    adds.put(d, e.getValue() + addMinutes);
+                }
+
+// Apply break minutes (only when session is closed)
+                final int breakMinutes = (s.BreakMinutes > 0) ? s.BreakMinutes : 0;
+                if (breakMinutes > 0 && s.CheckOut != null) {
+                    final LocalDate checkoutDay = ZonedDateTime.ofInstant(s.CheckOut, zone).toLocalDate();
+                    final Integer minutesThatDay = adds.get(checkoutDay);
+                    if (minutesThatDay != null) {
+                        final int reduced = Math.max(0, minutesThatDay - breakMinutes);
+                        adds.put(checkoutDay, reduced);
+                    }
+                }
+
+// Merge into global totals
+                for (final Map.Entry<LocalDate, Integer> e : adds.entrySet()) {
+                    final LocalDate d = e.getKey();
+                    final int merged = workedMinutesByDay.get(d) + e.getValue();
+                    workedMinutesByDay.put(d, merged);
                 }
             }
         }

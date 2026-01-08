@@ -23,6 +23,7 @@ public final class WorkflowRepository {
     private static final String K_CHECKIN = "checkIn";
     private static final String K_CHECKOUT = "checkOut";
     private static final String K_INTENDED_MINUTES = "intendedMinutes";
+    private static final String K_BREAK_MINUTES = "breakMinutes";
 
     private final SharedPreferences prefs;
 
@@ -54,7 +55,10 @@ public final class WorkflowRepository {
     public void saveSessions(@NonNull final ArrayList<WorkSession> sessions) {
         final JSONArray arr = new JSONArray();
         for (int i = 0; i < sessions.size(); i++) {
-            arr.put(toJson(sessions.get(i)));
+            final WorkSession s = sessions.get(i);
+            if (s != null) {
+                arr.put(toJson(s));
+            }
         }
         prefs.edit().putString(KEY_SESSIONS_JSON, arr.toString()).apply();
     }
@@ -80,6 +84,7 @@ public final class WorkflowRepository {
             final WorkSession s = sessions.get(i);
             if (s != null && s.isOpen()) {
                 s.CheckOut = checkIn; // auto-close at new checkin time
+                // Keep BreakMinutes as-is (likely 0). Alternatively set to 0 here if you prefer.
                 break;
             }
         }
@@ -90,13 +95,20 @@ public final class WorkflowRepository {
         return created;
     }
 
-    public boolean endSession(@NonNull final String sessionId, @NonNull final Instant checkOut) {
+    public boolean endSession(
+            @NonNull final String sessionId,
+            @NonNull final Instant checkOut,
+            final int breakMinutes
+    ) {
         final ArrayList<WorkSession> sessions = loadSessions();
 
         for (int i = 0; i < sessions.size(); i++) {
             final WorkSession s = sessions.get(i);
-            if (s != null && sessionId.equals(s.Id) && s.isOpen()) {
+            if (s == null) continue;
+
+            if (sessionId.equals(s.Id) && s.isOpen()) {
                 s.CheckOut = checkOut;
+                s.BreakMinutes = Math.max(0, breakMinutes);
                 saveSessions(sessions);
                 return true;
             }
@@ -113,6 +125,7 @@ public final class WorkflowRepository {
             obj.put(K_CHECKIN, s.CheckIn != null ? s.CheckIn.toString() : Instant.EPOCH.toString());
             obj.put(K_CHECKOUT, s.CheckOut != null ? s.CheckOut.toString() : JSONObject.NULL);
             obj.put(K_INTENDED_MINUTES, Math.max(0, s.IntendedMinutes));
+            obj.put(K_BREAK_MINUTES, Math.max(0, s.BreakMinutes));
         } catch (final JSONException ignored) {
         }
         return obj;
@@ -124,6 +137,7 @@ public final class WorkflowRepository {
             final String id = obj.optString(K_ID, "");
             final String inText = obj.optString(K_CHECKIN, Instant.EPOCH.toString());
             final int intended = Math.max(0, obj.optInt(K_INTENDED_MINUTES, 0));
+            final int breakMinutes = Math.max(0, obj.optInt(K_BREAK_MINUTES, 0));
 
             final Instant checkIn;
             try {
@@ -133,9 +147,12 @@ public final class WorkflowRepository {
             }
 
             final WorkSession s = new WorkSession(checkIn, intended);
+
             if (id != null && !id.trim().isEmpty()) {
                 s.Id = id;
             }
+
+            s.BreakMinutes = breakMinutes;
 
             // checkOut may be null
             if (!obj.isNull(K_CHECKOUT)) {

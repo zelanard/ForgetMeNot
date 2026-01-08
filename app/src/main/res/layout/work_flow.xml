@@ -76,12 +76,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="6dp"/>
 
+    <EditText
+        android:id="@+id/etBreakMinutes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Break (minutes)"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/etIntendedMinutes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="6dp"/>
+
     <Button
         android:id="@+id/btnToggleCheck"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Check in"
-        app:layout_constraintTop_toBottomOf="@id/etIntendedMinutes"
+        app:layout_constraintTop_toBottomOf="@id/etBreakMinutes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="6dp"/>

@@ -46,6 +46,7 @@ public final class WorkflowCheckFragment extends Fragment {
 
     private LocalDate selectedDate;
     private LocalTime selectedTime;
+    private EditText etBreakMinutes;
 
     @Nullable
     @Override
@@ -74,6 +75,7 @@ public final class WorkflowCheckFragment extends Fragment {
         etIntendedHours = view.findViewById(R.id.etIntendedHours);
         etIntendedMinutes = view.findViewById(R.id.etIntendedMinutes);
         btnToggleCheck = view.findViewById(R.id.btnToggleCheck);
+        etBreakMinutes = view.findViewById(R.id.etBreakMinutes);
 
         // Default selection to "now"
         final LocalDateTime now = LocalDateTime.now();
@@ -161,7 +163,8 @@ public final class WorkflowCheckFragment extends Fragment {
         final boolean checkedIn = (open != null && open.isOpen());
 
         if (checkedIn) {
-            viewModel.checkOut(when);
+            final int breakMins = parseIntSafe(etBreakMinutes, 0, 0);
+            viewModel.checkOut(when, breakMins);
             cancelWorkdayOverAlarm();
         } else {
             viewModel.checkIn(when, intendedMinutes);
