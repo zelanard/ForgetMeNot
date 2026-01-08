@@ -11,6 +11,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import java.security.InvalidParameterException;
+
 public final class HabitTrackerActivity extends BaseActivity {
 
     @Override
@@ -27,10 +29,15 @@ public final class HabitTrackerActivity extends BaseActivity {
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull final TabLayout.Tab tab, final int position) {
-                if (position == 0) {
-                    tab.setText("My Habits");
-                } else {
-                    tab.setText("New Habit");
+                switch (position){
+                    case 0:
+                        tab.setText(R.string.Habits_Tab_Header);
+                        break;
+                    case 1:
+                        tab.setText(R.string.Add_Tab_Header);
+                        break;
+                    default:
+                        throw new InvalidParameterException("Tab not recofnized");
                 }
             }
         }).attach();
