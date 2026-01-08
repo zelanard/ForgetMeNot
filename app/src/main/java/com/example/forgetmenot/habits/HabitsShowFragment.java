@@ -68,5 +68,6 @@ public final class HabitsShowFragment extends Fragment {
 
         viewModel.getHabits().observe(getViewLifecycleOwner(), habits -> adapter.submit(habits));
         viewModel.getCountToday().observe(getViewLifecycleOwner(), map -> adapter.submitCountToday(map));
+        viewModel.getStreakFires().observe(getViewLifecycleOwner(), map -> adapter.submitStreakFires(map));
     }
 }

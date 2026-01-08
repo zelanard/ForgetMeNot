@@ -29,6 +29,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
     private final Actions actions;
     private final ArrayList<Habit> items = new ArrayList<>();
     private final HashMap<String, Integer> countToday = new HashMap<>();
+    private final HashMap<String, Integer> streakFires = new HashMap<>();
 
     public HabitsAdapter(@NonNull final Actions actions) {
         this.actions = actions;
@@ -46,6 +47,12 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
         notifyDataSetChanged();
     }
 
+    public void submitStreakFires(@NonNull final Map<String, Integer> map) {
+        streakFires.clear();
+        streakFires.putAll(map);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
@@ -56,7 +63,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
     @Override
     public void onBindViewHolder(@NonNull final VH holder, final int position) {
         final Habit habit = items.get(position);
-        holder.bind(habit, position, actions, countToday);
+        holder.bind(habit, position, actions, countToday, streakFires);
     }
 
     @Override
@@ -74,6 +81,7 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
         private final Button btnAddCompletion;
         private final ImageButton btnEditHabit;
         private final ImageButton btnDeleteHabit;
+        private final TextView tvStreakFires;
 
         VH(@NonNull final View itemView) {
             super(itemView);
@@ -85,13 +93,15 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
             btnAddCompletion = itemView.findViewById(R.id.btnAddCompletion);
             btnEditHabit = itemView.findViewById(R.id.btnEditHabit);
             btnDeleteHabit = itemView.findViewById(R.id.btnDeleteHabit);
+            tvStreakFires = itemView.findViewById(R.id.tvStreakFires);
         }
 
         void bind(
                 @NonNull final Habit habit,
                 final int index,
                 @NonNull final Actions actions,
-                @NonNull final HashMap<String, Integer> countToday
+                @NonNull final HashMap<String, Integer> countToday,
+                @NonNull final HashMap<String, Integer> streakFires
         ) {
             tvHabitName.setText(habit.Name != null ? habit.Name : "");
             tvHabitDescription.setText(habit.Description != null ? habit.Description : "");
@@ -105,6 +115,10 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
                     : 0;
 
             final boolean completedToday = count >= goal;
+            final int fireCount = (!habitId.isEmpty() && streakFires.containsKey(habitId))
+                    ? Math.max(0, streakFires.get(habitId))
+                    : 0;
+            tvStreakFires.setText(repeatFire(Math.min(3, fireCount)));
 
             tvProgress.setText(completedToday ? (count + " / " + goal + " (Done)") : (count + " / " + goal));
 
@@ -116,6 +130,16 @@ public final class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.VH> 
                     actions.onIncrementToday(habitId);
                 }
             });
+        }
+
+        @NonNull
+        private static String repeatFire(final int count) {
+            if (count <= 0) return "";
+            final StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < count; i++) {
+                sb.append("🔥");
+            }
+            return sb.toString();
         }
 
         @NonNull
