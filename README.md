@@ -1,5 +1,5 @@
 ## Forget-Me-Not
-Forget me not is designed to help with remembering tasks, utilizing a to do lits, establishing good habits, 
+Forget-Me-Not is designed to help with remembering tasks, utilizing a to do lits, establishing good habits, 
 using a habit tracker and keeping track of work hours, with the option to remind the user when the workday 
 is over to establish healthy work/life balance.
 
