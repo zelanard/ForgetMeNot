@@ -41,7 +41,8 @@ Workflow is meant to help keeping track of worktime and overtime.
   * select time
   * set intended work hours (converted to minutes)
   * set intended work minutes (added to the hours)
-  * break minutes (subtracted from the total worked hours.
+  * break minutes (subtracted from the total worked hours
+  * alert the user when the planed workday is over 
 * Overtime
   * Week: This week
   * Projected total overtime: an indication of the users total overtime, assumes the user will work 1/5th total weeks workhours each unset weekday.
